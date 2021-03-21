@@ -29,6 +29,9 @@ export default {
     }
   },
   methods: {
+      toggleAddTask(){
+        this.showAddTask= !this.showAddTask
+    },
     deleteTask(id) {
       if(confirm('Are you sure?'))
       this.tasks = this.tasks.filter((task) => task.id !== id)
@@ -39,9 +42,6 @@ export default {
     addTask(task){
       this.tasks = [...this.tasks,task]
     },
-    toggleAddTask(){
-      this.showAddTask= !this.showAddTask
-    }
   },
   created() {
     this.tasks = [

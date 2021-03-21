@@ -6,7 +6,6 @@
 </div>
  
 </template>
-
 <script>
 import Task from './Task'
     export default {

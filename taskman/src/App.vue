@@ -1,13 +1,17 @@
 <template>
   <div class="container">
-    <h1>Test</h1>
+    <List title="Task Tracker"/>
   </div>
 </template>
 
 <script>
+import List from './components/List'
+
 export default {
 	name: "App",
-	components: {},
+	components: {
+    List,
+  },
 };
 </script>
 

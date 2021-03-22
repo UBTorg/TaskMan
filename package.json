@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "serve":  "node dist/index.js"
+    "serve": "node dist/index.js"
   },
   "repository": {
     "type": "git",

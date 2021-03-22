@@ -1,7 +1,6 @@
 <template>
-  <Header />
-  
   <div class="container">
+    <Header />
     <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
     <div v-show="showAddTask">
     <AddTask @add-task="addTask" />
@@ -32,45 +31,68 @@ export default {
     }
   },
   methods: {
-      toggleAddTask(){
-        this.showAddTask= !this.showAddTask
-      },
-      deleteTask(id) {
-        if(confirm('Are you sure you want to delete this task?')){
-          this.tasks = this.tasks.filter((task) => task.id !== id) //Everything back except task with this id
-        }
-      },
-      toggleReminder(id) {
-        this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
-      },
-      addTask(task){
-        this.tasks = [...this.tasks,task]
-      },
-  },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Doctors Appointment',
-        day: 'March 1st at 2:30pm',
-        reminder: true,
+    async getAccessToken() {
+      return this.$auth.getTokenSilently()
+    },
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+    async addTask(task) {
+      const accessToken = await this.$auth.getTokenSilently()
+      const res = await fetch('api/v1/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(task)
+      })
 
-      },
-      {
-        id: 2,
-        text: 'Meeting at School',
-        day: 'March 3rd at 1:30pm',
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: 'Food Shopping',
-        day: 'March 3rd at 11:30am',
-        reminder: false,
+      const data = await res.json()
+
+      this.tasks = [...this.tasks, data]
+    },
+    async deleteTask(id) {
+      if (confirm('Are you sure you want to delete this task?')) {
+
+        const res = await fetch(`api/tasks/${id}`, {
+        method: 'DELETE'
+      })
+
+      res.status === 200 ? (this.tasks = 
+      this.tasks.filter((task) =>
+      task.id !== id)) : alert('Error deleting task')
       }
-    ]
+    },
+    toggleReminder(id){
+      this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
+    },
+    async fetchTasks() {
+      const accessToken = await this.$auth.getTokenSilently();
+      console.warn(accessToken);
+      const res = await fetch('api/v1/tasks', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        },
+      })
+
+      const data = await res.json()
+
+      return data
+    },
+    async fetchTask(id) {
+      const res = await fetch(`api/tasks/${id}`)
+
+      const data = await res.json()
+
+      return data
+    }
+  },
+  async created() {
+    this.tasks = (await this.fetchTasks()).tasks
   }
-};
+}
 </script>
 
 

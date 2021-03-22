@@ -1,0 +1,6 @@
+{
+  "domain": "dev-k0epto-i.eu.auth0.com",
+  "client_id": "JM4j0ivZuVHQptRvyxaW1WY5xRTUjBcz",
+  "redirect_uri": "http://localhost:8080/callback",
+  "audience": "https://ram/api"
+}

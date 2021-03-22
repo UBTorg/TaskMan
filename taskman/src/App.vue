@@ -1,10 +1,12 @@
 <template>
-  <Header />
+  <!-- <Header /> -->
   
   <div class="container">
-    <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
-    <div v-show="showAddTask">
-    <AddTask @add-task="addTask" />
+    <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" :class="[showAddTask ? 'closed' : '']"/>
+    <div :class="[showAddTask ? 'black-shadow' : '']">
+       <div class=add-form v-show="showAddTask">
+        <AddTask @add-task="addTask" />
+      </div>
     </div>
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   
@@ -75,7 +77,36 @@ export default {
 
 
 <style>
-
+html,body{
+  height: 100%;
+}
+body{
+  position: relative;
+}
+header.closed button{
+  top: 57px;
+  background: red;
+  position: absolute;
+  z-index: 111;
+  right: 34%;
+}
+.add-form{
+  max-width: 500px;
+  background: beige;
+  padding: 1px 20px;
+  border-radius: 17px;
+  position: sticky;
+  margin: auto;
+  margin-top: 40px;
+}
+.black-shadow{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 * {
   box-sizing: border-box;
@@ -87,8 +118,8 @@ body {
   background-color: #F7F8FA;
 }
 .container {
-  max-width: 500px;
-  margin: 30px auto;
+  /* max-width: 500px;
+  margin: 30px auto; */
   overflow: auto;
   min-height: 300px;
   border: 1px solid steelblue;

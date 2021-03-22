@@ -1,0 +1,39 @@
+{
+  "name": "ram-backend",
+  "version": "1.0.0",
+  "description": "The backend of RAM",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "serve":  "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlerezeka/ram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vlerezeka/ram/issues"
+  },
+  "homepage": "https://github.com/vlerezeka/ram#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.4.1",
+    "jwks-rsa": "^2.0.1",
+    "mongoose": "^5.12.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/mongoose": "^5.10.3",
+    "@types/node": "^14.14.35",
+    "dotenv": "^8.2.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3"
+  }
+}

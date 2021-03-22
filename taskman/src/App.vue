@@ -29,23 +29,23 @@ export default {
     return {
       tasks: [],
       showAddTask:false,
-
     }
   },
   methods: {
       toggleAddTask(){
         this.showAddTask= !this.showAddTask
-    },
-    deleteTask(id) {
-      if(confirm('Are you sure?'))
-      this.tasks = this.tasks.filter((task) => task.id !== id)
-    },
-    toggleReminder(id) {
-      this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
-    },
-    addTask(task){
-      this.tasks = [...this.tasks,task]
-    },
+      },
+      deleteTask(id) {
+        if(confirm('Are you sure you want to delete this task?')){
+          this.tasks = this.tasks.filter((task) => task.id !== id) //Everything back except task with this id
+        }
+      },
+      toggleReminder(id) {
+        this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
+      },
+      addTask(task){
+        this.tasks = [...this.tasks,task]
+      },
   },
   created() {
     this.tasks = [
@@ -54,6 +54,7 @@ export default {
         text: 'Doctors Appointment',
         day: 'March 1st at 2:30pm',
         reminder: true,
+
       },
       {
         id: 2,

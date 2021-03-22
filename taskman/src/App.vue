@@ -1,4 +1,6 @@
 <template>
+  <Header />
+  
   <div class="container">
     <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
     <div v-show="showAddTask">
@@ -10,6 +12,7 @@
 </template>
 
 <script>
+import Header from './components/Header'
 import List from './components/List'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
@@ -17,6 +20,7 @@ import AddTask from './components/AddTask'
 export default {
 	name: "App",
 	components: {
+    Header,
     List,
     Tasks,
     AddTask,
@@ -79,6 +83,7 @@ export default {
 }
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #F7F8FA;
 }
 .container {
   max-width: 500px;
@@ -88,6 +93,7 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+  background-color: #fff;
 }
 .btn {
   display: inline-block;

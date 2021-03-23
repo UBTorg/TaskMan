@@ -1,43 +1,86 @@
 <template>
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <!-- <h3>Admin dashboard</h3> -->
+  <Users :users="users" />
+</div>
 </template>
 
 <script>
+import Users from '../components/Users'
 
 export default {
-    name: 'AdminDashboard'
+    name: 'AdminDashboard',
+    components: {Users},
+    data() {
+      return {
+        users: []
+      }
+    },
+    created() {
+      this.users = [
+        {
+          id: 1,
+          first: 'Vlere',
+          last: 'Zeka',
+          email: 'vlere.zeka@gmail.com',
+        },
+         {
+          id: 2,
+          first: 'Vlere',
+          last: 'Zeka',
+          email: 'vlere.zeka@gmail.com'
+        },
+         {
+          id: 3,
+          first: 'Vlere',
+          last: 'Zeka',
+          email: 'vlere.zeka@gmail.com'
+        }
+      ]
+    }
 }
 </script>
 
 <style scoped>
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+}
+.btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
 </style>

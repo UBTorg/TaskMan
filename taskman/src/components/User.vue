@@ -6,19 +6,11 @@
       <i @click="$emit('delete-user', user.id)" class="fas fa-times"></i>
     </h3>
     <p>{{ user.email }}</p>
-    <p v-if="user.isAdmin == true">
+    <p class="bold" v-if="user.isAdmin == true">
         This user is an admin
     </p>
-    <button @click="makeAdmin" v-else>Make admin</button>
+    <button @click="$emit('make-admin', user.id)" v-else>Make admin</button>
   </div>
-
-   <!-- <div :class="[user.isAdmin ? 'isAdmin' : '']">
-     <h3>
-      {{ user.name }}
-      <i @click="$emit('delete-user', user.id)" class="fas fa-times"></i>
-    </h3>
-    <p>{{ user.email }}</p>
-  </div> -->
 </template>
 
 <script>
@@ -26,7 +18,7 @@ export default {
   name: 'User',
   props: {
     user: Object,
-  },
+  }
 }
 </script>
 
@@ -39,13 +31,25 @@ export default {
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+    transition: 200ms transform ease;
 }
-.user.reminder {
-  border-left: 5px solid green;
+.user:hover{
+    transform: translate(2px, -2px);
 }
 .user h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+button{
+    background: #4682b4;
+    color: white;
+    font-weight: 500;
+    padding: 5px 21px;
+    font-stretch: 6px;
+    border-radius: 5px;
+}
+.bold{
+   font-weight: 700; 
 }
 </style>

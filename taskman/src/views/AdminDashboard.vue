@@ -1,7 +1,7 @@
 <template>
 <div>
-  <!-- <h3>Admin dashboard</h3> -->
-  <Users :users="users" />
+  <h2>Admin dashboard</h2>
+  <Users @make-admin="makeAdmin" @delete-user="deleteUser" :users="users" />
 </div>
 </template>
 
@@ -15,6 +15,19 @@ export default {
       return {
         users: []
       }
+    },
+    methods: {
+      deleteUser(id) {
+        if (confirm('Are you sure you want to delete this user?')){
+
+        this.users = this.users.filter((user) => user.id !== id)
+        }
+      },
+      makeAdmin(id) {
+        if (confirm('Are you sure you want to make this user admin?')){
+          this.users = this.users.map((user) => user.id === id ? {...user, isAdmin: !user.isAdmin} : user)
+        }
+      },
     },
     created() {
       this.users = [

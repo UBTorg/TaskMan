@@ -73,7 +73,13 @@ export default {
 
 <style scoped>
 .add-form {
-    margin-bottom: 40px;
+  max-width: 500px;
+  background: #f4f4f4;
+  padding: 1px 20px;
+  border-radius: 17px;
+  position: sticky;
+  margin: auto;
+  margin-top: 40px;
 }
 
 .form-control {
@@ -104,6 +110,11 @@ export default {
     margin: 5px;
     padding: 3px 7px;
     font-size: 17px;
+}
+
+.form-control checkbox{
+    width:100%;
+    display: block
 }
 .form-control-check label {
     flex:1;

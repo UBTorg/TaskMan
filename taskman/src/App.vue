@@ -7,7 +7,7 @@
         <h3>Click the Add Task button to add a new task</h3>
       </div>
       <div :class="[showAddTask ? 'black-shadow' : '']">
-        <div class=add-form v-show="showAddTask">
+        <div class="add-form-container" v-show="showAddTask">
           <AddTask @add-task="addTask" />
         </div>
       </div>
@@ -70,11 +70,12 @@ body{
 }
 header.closed button{
   top: 57px;
-  background: red;
   position: absolute;
   z-index: 111;
   right: 34%;
+  color: black;
 }
+
 .welcome {
   text-align: center;
   padding: 20px;
@@ -89,15 +90,19 @@ header.closed button{
   font-size: 20px;
   font-weight: normal;
 }
-.add-form{
+.add-form-container{
   max-width: 500px;
-  background: beige;
-  padding: 1px 20px;
+  background: #f4f4f4;
+  padding: 25px 20px;
+  padding-bottom: 55px;
   border-radius: 17px;
   position: sticky;
   margin: auto;
   margin-top: 40px;
+  box-shadow: 1px 2px 7px 3px rgba(0,0,0,.2)
+  
 }
+
 .black-shadow{
   position: absolute;
   height: 100%;

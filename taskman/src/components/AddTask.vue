@@ -42,14 +42,14 @@ export default {
             description: '',
             day: '',
             reminder: false,
-            priority: '',
+            priority: 'No Priority',
         }
     },
       methods: {
     onSubmit(e) {
       e.preventDefault()
-      if (!this.text) {
-        alert('Please add a task')
+      if (!this.text || !this.description  || !this.day) {
+        alert('Please fill text, description and time form')
         return
       }
       const newTask = {
@@ -65,7 +65,7 @@ export default {
       this.description = ''
       this.day = ''
       this.reminder = false
-      this.priority = ''
+      this.priority = 'No Priority'
     },
   },
 }
@@ -98,6 +98,13 @@ export default {
     justify-content: space-between;
 }
 
+.form-control select {
+    width: 100%;
+    height: 40px;
+    margin: 5px;
+    padding: 3px 7px;
+    font-size: 17px;
+}
 .form-control-check label {
     flex:1;
 }

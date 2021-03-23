@@ -28,5 +28,8 @@ import Button from './Button'
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        background-color: white;
+        padding: 10px 40px;
+        box-shadow: 1px 1px 10px rgba(0,0,0,.1);
     }
 </style>

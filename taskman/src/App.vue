@@ -1,20 +1,22 @@
 <template>
-  <!-- <Header /> -->
-  
-  <div class="container">
-    <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" :class="[showAddTask ? 'closed' : '']"/>
-    <div :class="[showAddTask ? 'black-shadow' : '']">
-       <div class=add-form v-show="showAddTask">
-        <AddTask @add-task="addTask" />
+  <div>
+    <div class="container">
+      <List @toggle-add-task="toggleAddTask" title="Task Manager" :showAddTask="showAddTask" :class="[showAddTask ? 'closed' : '']"/>
+      <div class="welcome" v-show="!hasTask">
+        <h1>Welcome to the Task Manager</h1>
+        <h3>Click the Add Task button to add a new task</h3>
       </div>
+      <div :class="[showAddTask ? 'black-shadow' : '']">
+        <div class=add-form v-show="showAddTask">
+          <AddTask @add-task="addTask" />
+        </div>
+      </div>
+      <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
     </div>
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
-  
   </div>
 </template>
 
 <script>
-import Header from './components/Header'
 import List from './components/List'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
@@ -22,7 +24,6 @@ import AddTask from './components/AddTask'
 export default {
 	name: "App",
 	components: {
-    Header,
     List,
     Tasks,
     AddTask,
@@ -31,6 +32,9 @@ export default {
     return {
       tasks: [],
       showAddTask:false,
+      taskEditingId: '',
+      updatedTask: [],
+      hasTask: false,
     }
   },
   methods: {
@@ -47,31 +51,9 @@ export default {
       },
       addTask(task){
         this.tasks = [...this.tasks,task]
+        this.hasTask = true
       },
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: 'Doctors Appointment',
-        day: 'March 1st at 2:30pm',
-        reminder: true,
-
-      },
-      {
-        id: 2,
-        text: 'Meeting at School',
-        day: 'March 3rd at 1:30pm',
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: 'Food Shopping',
-        day: 'March 3rd at 11:30am',
-        reminder: false,
-      }
-    ]
-  }
 };
 </script>
 
@@ -89,6 +71,20 @@ header.closed button{
   position: absolute;
   z-index: 111;
   right: 34%;
+}
+.welcome {
+  text-align: center;
+  padding: 20px;
+}
+
+.welcome h1 {
+  font-size: 35px;
+  padding-bottom: 5px;
+}
+
+.welcome h3 {
+  font-size: 20px;
+  font-weight: normal;
 }
 .add-form{
   max-width: 500px;
@@ -115,18 +111,22 @@ header.closed button{
 }
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #F7F8FA;
+  background-color: #fff;
 }
 .container {
   /* max-width: 500px;
   margin: 30px auto; */
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
-  padding: 30px;
+  /* border: 1px solid steelblue; */
+  padding-top: 0px;
   border-radius: 5px;
-  background-color: #fff;
 }
+
+.header-container {
+  background-color: white;
+}
+
 .btn {
   display: inline-block;
   background: #000;

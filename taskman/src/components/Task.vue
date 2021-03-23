@@ -2,11 +2,11 @@
     <div class="taskk" @dblclick="$emit('toggle-reminder', task.id)" :class="[task.reminder ? 'reminder' : '', 'task']">
         <h3>
             {{task.text}}
-            <i @click="$emit('delete-task',task.id)" class="fas fa-times"></i>
+            <i @click="$emit('delete-task',task.id)"  class="fas fa-minus"></i>
         </h3>
-        <p>{{task.description}}</p>
-        <p>{{task.day}}</p>
-        <p>{{task.priority}}</p>
+        <p><span style="font-weight: bold;">Description: </span> {{task.description}}</p>
+        <p><span style="font-weight: bold;">Time: </span>{{task.day}}</p>
+        <p><span style="font-weight: bold;">Priority: </span>{{task.priority}}</p>
     </div>
 </template>
 
@@ -22,7 +22,11 @@ export default {
 <style scoped>
 
 .fas {
-  color: rgb(78, 78, 78);
+  color: rgba(0,0,0,.5);
+}
+
+.fas:hover {
+  color: #55C6F0;
 }
 
 .task {
@@ -30,10 +34,9 @@ export default {
   margin: 12px;
   padding: 10px 20px;
   cursor: pointer;
-  min-height: 250px;
+  min-height: 220px;
   border-radius: 10px;
   transition: transform 200ms ease 0s;
-  
 }
 
 .task:hover {
@@ -47,6 +50,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 25px;
+  line-height: 1.8em;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  padding-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .high {

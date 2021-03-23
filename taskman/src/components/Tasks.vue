@@ -26,16 +26,29 @@ import Task from './Task'
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    padding: 30px;
 }
 .card {
   flex: 0 0 33%;
   cursor: pointer;
-  min-height: 250px;
 }
 
 @media only screen and (min-width: 1500px) {
     .card {
         flex: 0 0 25%;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .card {
+        flex: 0 0 50%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .card {
+        flex: 0 0 100%;
     }
 }
 </style>

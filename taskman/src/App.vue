@@ -13,6 +13,7 @@
       </div>
       <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -20,6 +21,7 @@
 import List from './components/List'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
+import Footer from './components/Footer'
 
 export default {
 	name: "App",
@@ -27,6 +29,7 @@ export default {
     List,
     Tasks,
     AddTask,
+    Footer
   },
   data() {
     return {
@@ -117,7 +120,7 @@ body {
   /* max-width: 500px;
   margin: 30px auto; */
   overflow: auto;
-  min-height: 300px;
+  min-height: 100vh;
   /* border: 1px solid steelblue; */
   padding-top: 0px;
   border-radius: 5px;

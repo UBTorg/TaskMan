@@ -20,21 +20,21 @@ export default {
       this.users = [
         {
           id: 1,
-          first: 'Vlere',
-          last: 'Zeka',
-          email: 'vlere.zeka@gmail.com',
+          name: 'Filan Fisteku',
+          email: 'filan.fisteku1@gmail.com',
+          isAdmin: false,
         },
          {
           id: 2,
-          first: 'Vlere',
-          last: 'Zeka',
-          email: 'vlere.zeka@gmail.com'
+          name: 'Filan Fisteku 2',
+          email: 'filan.fisteku2@gmail.com',
+           isAdmin: true
         },
          {
           id: 3,
-          first: 'Vlere',
-          last: 'Zeka',
-          email: 'vlere.zeka@gmail.com'
+          name: 'Filan Fisteku 3',
+          email: 'filan.fisteku3@gmail.com',
+          isAdmin: false
         }
       ]
     }
@@ -52,7 +52,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .container {
-  max-width: 500px;
+  max-width: 800px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;

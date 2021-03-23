@@ -1,6 +1,6 @@
 <template>
-    <div v-for="user in users">
-        <h4>{{user.first}} {{user.last}} {{user.email}}</h4>
+    <div :key="user.id" v-for="user in users">
+        <User :user="user" />
     </div>
 </template>
 

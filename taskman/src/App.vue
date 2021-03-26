@@ -55,6 +55,7 @@ export default {
       addTask(task){
         this.tasks = [...this.tasks,task]
         this.hasTask = true
+        this.showAddTask= !this.showAddTask
       },
   },
 };
@@ -62,100 +63,5 @@ export default {
 
 
 <style>
-html,body{
-  height: 100%;
-}
-body{
-  position: relative;
-}
-header.closed button{
-  top: 57px;
-  position: absolute;
-  z-index: 111;
-  right: 34%;
-  color: black;
-}
-
-.welcome {
-  text-align: center;
-  padding: 20px;
-}
-
-.welcome h1 {
-  font-size: 35px;
-  padding-bottom: 5px;
-}
-
-.welcome h3 {
-  font-size: 20px;
-  font-weight: normal;
-}
-.add-form-container{
-  max-width: 500px;
-  background: #f4f4f4;
-  padding: 25px 20px;
-  padding-bottom: 55px;
-  border-radius: 17px;
-  position: sticky;
-  margin: auto;
-  margin-top: 40px;
-  box-shadow: 1px 2px 7px 3px rgba(0,0,0,.2)
-  
-}
-
-.black-shadow{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0,0,0,0.5);
-}
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff;
-}
-.container {
-  /* max-width: 500px;
-  margin: 30px auto; */
-  overflow: auto;
-  min-height: 100vh;
-  /* border: 1px solid steelblue; */
-  padding-top: 0px;
-  border-radius: 5px;
-}
-
-.header-container {
-  background-color: white;
-}
-
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-.btn:focus {
-  outline: none;
-}
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
-}
+  @import './components/assets/CSS/style.css';
 </style>

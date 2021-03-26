@@ -1,17 +1,17 @@
 <template>
   <form @submit="onSubmit" class="add-form">
         <div class="form-control">
-            <label>Task</label>
+            <label>Title<span style="color: red">*</span></label>
             <input type="text" v-model="text" name="text"
             placeholder="Add Task" />
         </div>
         <div class="form-control">
-            <label>Description</label>
+            <label>Description<span style="color: red">*</span></label>
             <input type="text" v-model="description" name="description"
             placeholder="Add Description" />
         </div>
         <div class="form-control">
-            <label>Day & Time</label>
+            <label>Time<span style="color: red">*</span></label>
             <input type="text" v-model="day" name="day"
             placeholder="Add Day &amp Time" />
         </div>
@@ -24,12 +24,10 @@
                 <option value="none">No Priority</option>
             </select>
         </div>
-
-        <div class="form-control form-control-check">
+        <div class="form-control">
             <label>Set Reminder</label>
-            <input type="checkbox" v-model="reminder" name="reminder"/>
+            <input class="check" type="checkbox" v-model="reminder" name="reminder"/>
         </div>
-        
         <input type="submit" value="Save Task" class="btn btn-block">
     </form>
 </template>
@@ -70,58 +68,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.add-form {
-  max-width: 500px;
-  background: #f4f4f4;
-  padding: 1px 20px;
-  border-radius: 17px;
-  position: sticky;
-  margin: auto;
-  margin-top: 40px;
-}
-
-.form-control {
-    margin: 20px 0;
-}
-
-.form-control label {
-    display: block;
-}
-
-.form-control input {
-    width: 100%;
-    height: 40px;
-    margin: 5px;
-    padding: 3px 7px;
-    font-size: 17px;
-}
-
-.form-control-check {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.form-control select {
-    width: 100%;
-    height: 40px;
-    margin: 5px;
-    padding: 3px 7px;
-    font-size: 17px;
-}
-
-.form-control checkbox{
-    width:100%;
-    display: block
-}
-.form-control-check label {
-    flex:1;
-}
-
-.form-control-check input {
-    flex: 2;
-    height: 20px;
-}
-</style>

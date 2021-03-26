@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ITask } from "../../services/task-schema";
-import { getTasks, saveTask, getUserInfo } from "../../services/repository-service";
+import { getTasks, saveTask, getUserInfo, getUsers, makeAdmin } from "../../services/repository-service";
 
 const router = Router();
 
@@ -11,10 +11,25 @@ router.get("/tasks", async (req, res) => {
     })
 });
 
+router.get("/users", async (req, res) => {
+    const userId = req.user.sub;
+    return res.send({
+        "users": await getUsers()
+    })
+});
+router.put("/users/:userid/make-admin", async (req, res) => {
+    const reqUserId = req.user.sub;
+    const newAdminUserId = req.params.userid;
+    await makeAdmin(newAdminUserId, reqUserId)
+    return res.send({
+    })
+});
+
 router.get("/user-info", async (req, res) => {
     try {
         const userId = req.user.sub;
-        return res.send(await getUserInfo(userId))
+        const email = req.user['https://taskman.com/email']
+        return res.send(await getUserInfo(userId, email))
     }
     catch (e) {
         console.log(e)

@@ -1,68 +1,84 @@
 <template>
-<div>
-  <h2>Admin dashboard</h2>
-  <Users @make-admin="makeAdmin" @delete-user="deleteUser" :users="users" />
-</div>
+  <div>
+    <h2>Admin dashboard</h2>
+    <Users @make-admin="makeAdmin" @delete-user="deleteUser" :users="users" />
+  </div>
 </template>
 
 <script>
-import Users from '../components/Users'
+import Users from "../components/Users";
 
 export default {
-    name: 'AdminDashboard',
-    components: {Users},
-    data() {
-      return {
-        users: []
+  name: "AdminDashboard",
+  components: { Users },
+  data() {
+    return {
+      users: [],
+    };
+  },
+  methods: {
+    async fetchUsers() {
+      const accessToken = await this.$auth.getTokenSilently();
+      const res = await fetch("api/v1/users", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const data = await res.json();
+
+      return data;
+    },
+    async makeAdmin(id) {
+      if (confirm("Are you sure you want to make this user admin?")) {
+        const accessToken = await this.$auth.getTokenSilently();
+        const res = await fetch(`api/v1/users/${id}/make-admin`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        this.users = (await this.fetchUsers()).users;
       }
     },
-    methods: {
-      deleteUser(id) {
-        if (confirm('Are you sure you want to delete this user?')){
-
-        this.users = this.users.filter((user) => user.id !== id)
-        }
-      },
-      makeAdmin(id) {
-        if (confirm('Are you sure you want to make this user admin?')){
-          this.users = this.users.map((user) => user.id === id ? {...user, isAdmin: !user.isAdmin} : user)
-        }
-      },
-    },
-    created() {
-      this.users = [
-        {
-          id: 1,
-          name: 'Filan Fisteku',
-          email: 'filan.fisteku1@gmail.com',
-          isAdmin: false,
-        },
-         {
-          id: 2,
-          name: 'Filan Fisteku 2',
-          email: 'filan.fisteku2@gmail.com',
-           isAdmin: true
-        },
-         {
-          id: 3,
-          name: 'Filan Fisteku 3',
-          email: 'filan.fisteku3@gmail.com',
-          isAdmin: false
-        }
-      ]
-    }
-}
+  },
+  async created() {
+    // this.users = [
+    //   {
+    //     id: 1,
+    //     name: "Filan Fisteku",
+    //     email: "filan.fisteku1@gmail.com",
+    //     isAdmin: false,
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Filan Fisteku 2",
+    //     email: "filan.fisteku2@gmail.com",
+    //     isAdmin: true,
+    //   },
+    //   {
+    //     id: 3,
+    //     name: "Filan Fisteku 3",
+    //     email: "filan.fisteku3@gmail.com",
+    //     isAdmin: false,
+    //   },
+    // ];
+    this.users = (await this.fetchUsers()).users;
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .container {
   max-width: 800px;

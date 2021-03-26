@@ -20,7 +20,8 @@ const routes = [
     {
         path: '/admin',
         name: 'AdminDashboard',
-        component: AdminDashboard
+        component: AdminDashboard,
+        beforeEnter: routeGuard
     }
 ];
 const router = createRouter({

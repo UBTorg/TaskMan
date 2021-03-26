@@ -7,11 +7,13 @@ export const userSchema = new Schema({
         type: Boolean,
         default: false
     },
-    auth0_id: String
+    auth0_id: String,
+    email: String
 });
 
 
 export interface IUser {
     isAdmin: Boolean,
-    auth0_id: String
+    auth0_id: String,
+    email: String
 }

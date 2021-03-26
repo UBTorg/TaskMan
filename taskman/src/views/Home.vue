@@ -1,29 +1,39 @@
 <template>
   <div class="container">
     <a>
-        <router-link to="/admin">
-            Admin dashboard
-        </router-link>
+      <div>
+        {{ userInfo }}
+      </div>
+      <router-link v-if="userInfo.isAdmin" to="/admin">
+        Admin dashboard
+      </router-link>
     </a>
     <Header />
-    <List @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
+    <List
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker"
+      :showAddTask="showAddTask"
+    />
     <div v-show="showAddTask">
-    <AddTask @add-task="addTask" />
+      <AddTask @add-task="addTask" />
     </div>
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
-  
+    <Tasks
+      @toggle-reminder="toggleReminder"
+      @delete-task="deleteTask"
+      :tasks="tasks"
+    />
   </div>
 </template>
 
 <script>
-import Header from '../components/Header'
-import List from '../components/List'
-import Tasks from '../components/Tasks'
-import AddTask from '../components/AddTask'
+import Header from "../components/Header";
+import List from "../components/List";
+import Tasks from "../components/Tasks";
+import AddTask from "../components/AddTask";
 
 export default {
-	name: "Home",
-	components: {
+  name: "Home",
+  components: {
     Header,
     List,
     Tasks,
@@ -32,86 +42,104 @@ export default {
   data() {
     return {
       tasks: [],
-      showAddTask:false,
-    }
+      showAddTask: false,
+      userInfo: {},
+    };
   },
   methods: {
     async getAccessToken() {
-      return this.$auth.getTokenSilently()
+      return this.$auth.getTokenSilently();
     },
+    async fetchUserInfo() {
+      const accessToken = await this.getAccessToken();
+      const res = await fetch("api/v1/user-info", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const data = await res.json();
+
+      return data;
+    },
+
     toggleAddTask() {
-      this.showAddTask = !this.showAddTask
+      this.showAddTask = !this.showAddTask;
     },
     async addTask(task) {
-      const accessToken = await this.$auth.getTokenSilently()
-      const res = await fetch('api/v1/tasks', {
-        method: 'POST',
+      const accessToken = await this.$auth.getTokenSilently();
+      const res = await fetch("api/v1/tasks", {
+        method: "POST",
         headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
+          "Content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(task)
-      })
+        body: JSON.stringify(task),
+      });
 
-      const data = await res.json()
+      const data = await res.json();
 
-      this.tasks = [...this.tasks, data]
+      this.tasks = [...this.tasks, data];
     },
     async deleteTask(id) {
-      if (confirm('Are you sure you want to delete this task?')) {
-
+      if (confirm("Are you sure you want to delete this task?")) {
         const res = await fetch(`api/tasks/${id}`, {
-        method: 'DELETE'
-      })
+          method: "DELETE",
+        });
 
-      res.status === 200 ? (this.tasks = 
-      this.tasks.filter((task) =>
-      task.id !== id)) : alert('Error deleting task')
+        res.status === 200
+          ? (this.tasks = this.tasks.filter((task) => task.id !== id))
+          : alert("Error deleting task");
       }
     },
-    toggleReminder(id){
-      this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      );
     },
     async fetchTasks() {
       const accessToken = await this.$auth.getTokenSilently();
       console.warn(accessToken);
-      const res = await fetch('api/v1/tasks', {
-        method: 'GET',
+      const res = await fetch("api/v1/tasks", {
+        method: "GET",
         headers: {
-          'Authorization': `Bearer ${accessToken}`
+          Authorization: `Bearer ${accessToken}`,
         },
-      })
+      });
 
-      const data = await res.json()
+      const data = await res.json();
 
-      return data
+      return data;
     },
     async fetchTask(id) {
-      const res = await fetch(`api/tasks/${id}`)
+      const res = await fetch(`api/tasks/${id}`);
 
-      const data = await res.json()
+      const data = await res.json();
 
-      return data
-    }
+      return data;
+    },
   },
+
   async created() {
-    this.tasks = (await this.fetchTasks()).tasks
-  }
-}
+    this.tasks = (await this.fetchTasks()).tasks;
+    console.log("works");
+    this.userInfo = await this.fetchUserInfo();
+  },
+};
 </script>
 
 
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #F7F8FA;
+  font-family: "Poppins", sans-serif;
+  background-color: #f7f8fa;
 }
 .container {
   max-width: 500px;

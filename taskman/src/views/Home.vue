@@ -1,17 +1,19 @@
 <template>
   <div>
     <div class="container">
-      <!-- <a>
-      <router-link v-if="userInfo.isAdmin" to="/admin">
-        Admin dashboard
-      </router-link>
-    </a> -->
       <List
         @toggle-add-task="toggleAddTask"
         title="Task Manager"
         :showAddTask="showAddTask"
         :class="[showAddTask ? 'closed' : '']"
       />
+      <!-- <Logout @log-out="logOut" /> -->
+      <button class="btn" @click="logout">Log out</button>
+      <a>
+        <router-link v-if="userInfo.isAdmin" to="/admin">
+          Admin dashboard
+        </router-link>
+      </a>
       <div class="welcome" v-show="!hasTask">
         <h1>Welcome to the Task Manager</h1>
         <h3>Click the Add Task button to add a new task</h3>
@@ -130,6 +132,12 @@ export default {
       const data = await res.json();
 
       return data;
+    },
+    logout() {
+      console.log("logging out");
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      });
     },
   },
 

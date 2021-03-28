@@ -5,7 +5,7 @@
       <i @click="$emit('delete-user', user.auth0_id)" class="fas fa-times"></i>
     </h3>
     <p class="bold" v-if="user.isAdmin == true">This user is an admin</p>
-    <button @click="$emit('make-admin', user.auth0_id)" v-else>
+    <button class="btn" @click="$emit('make-admin', user.auth0_id)" v-else>
       Make admin
     </button>
   </div>

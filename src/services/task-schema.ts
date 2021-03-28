@@ -3,14 +3,19 @@ import * as mongoose from "mongoose";
 const { Schema } = mongoose;
 
 export const taskSchema = new Schema({
-    text: String,
-    date: { type: Date, default: Date.now },
-    userId: String,
+    text: { type: String },
+    description: { type: String },
+    day: { type: Date, default: Date.now },
+    userId: { type: String },
+    priority: { type: String }
 });
 
 
 export interface ITask {
+    _id?: String,
     text: string,
-    date: Date,
-    userId?: string
+    description: String,
+    day: Date,
+    userId?: string,
+    priority: String
 }

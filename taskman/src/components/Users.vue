@@ -1,11 +1,7 @@
 <template>
   <div>
     <div :key="user.auth0_id" v-for="user in users">
-      <User
-        @make-admin="$emit('make-admin', user.auth0_id)"
-        @delete-user="$emit('delete-user', user.auth0_id)"
-        :user="user"
-      />
+      <User @make-admin="$emit('make-admin', user.auth0_id)" :user="user" />
     </div>
   </div>
 </template>
@@ -21,9 +17,7 @@ export default {
   components: {
     User,
   },
-  emits: ["delete-user", "make-admin"],
+  emits: ["make-admin"],
 };
 </script>
 
-<style scoped>
-</style>

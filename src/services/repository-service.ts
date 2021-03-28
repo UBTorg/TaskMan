@@ -1,4 +1,4 @@
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import { ITask, taskSchema } from "./task-schema";
 import { IUser, userSchema } from "./user-schema";
 
@@ -10,6 +10,12 @@ const User = mongoose.model('User', userSchema);
 export async function saveTask(task: ITask) {
     return Task.create(task);
 }
+export async function deleteTask(taskId: string) {
+    var objectId = mongoose.Types.ObjectId(taskId);
+    return Task.deleteOne({ _id: objectId });
+}
+
+
 
 export async function getTasks(userId: string) {
     return Task.find({ userId })

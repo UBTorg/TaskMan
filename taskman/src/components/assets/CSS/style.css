@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: #fff;
+	position: relative;
+}
+
+header.closed button {
+	top: 57px;
+	position: absolute;
+	z-index: 111;
+	right: 34%;
+	color: black;
+}
+
+.welcome {
+	text-align: center;
+	padding: 20px;
+}
+
+.welcome h1 {
+	font-size: 35px;
+	padding-bottom: 5px;
+}
+
+.welcome h3 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.add-form-container {
+	max-width: 500px;
+	background: #f4f4f4;
+	padding: 25px 20px;
+	padding-bottom: 55px;
+	border-radius: 17px;
+	position: sticky;
+	margin: auto;
+	margin-top: 40px;
+	box-shadow: 1px 2px 7px 3px rgba(0, 0, 0, 0.2);
+}
+
+.black-shadow {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+	/* max-width: 500px;
+  margin: 30px auto; */
+	overflow: auto;
+	min-height: 100vh;
+	/* border: 1px solid steelblue; */
+	padding-top: 0px;
+	border-radius: 5px;
+	background-color: #f3f3f3;
+}
+
+.header-container {
+	background-color: white;
+}
+
+.btn {
+	display: inline-block;
+	background: #000;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 15px;
+	font-family: inherit;
+}
+.btn:focus {
+	outline: none;
+}
+.btn:active {
+	transform: scale(0.98);
+}
+.btn-block {
+	display: block;
+	width: 100%;
+}
+
+/* Home.vue end ************************************************** */
+
+/* AdminDashboard.vue start ************************************************** */
+
+.admin {
+	max-width: 800px;
+	margin: 30px auto;
+	overflow: auto;
+	min-height: 300px;
+	border: 1px solid steelblue;
+	padding: 30px;
+	border-radius: 5px;
+}
+
+/* AdminDashboard.vue end ************************************************** */
+
+/* Tasks.vue begin ************************************************** */
+.task-container {
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	padding: 30px;
+}
+.card {
+	flex: 0 0 25%;
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 1500px) {
+	.card {
+		flex: 0 0 25%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.card {
+		flex: 0 0 50%;
+	}
+	header.closed button {
+		right: 24% !important;
+	}
+}
+
+@media only screen and (max-width: 550px) {
+	.card {
+		flex: 0 0 100%;
+	}
+	header.closed button {
+		right: 7% !important;
+	}
+}
+/* Tasks.vue end ************************************************** */
+
+/* Task.vue begin ************************************************** */
+
+.fas {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.fas:hover {
+	color: #55c6f0;
+}
+
+.task {
+	background: #fff;
+	margin: 12px;
+	padding: 10px 20px;
+	cursor: pointer;
+	min-height: 220px;
+	border-radius: 10px;
+	transition: transform 200ms ease 0s;
+	box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1367px) {
+	.task {
+		min-height: 190px;
+		padding: 8px 18px;
+	}
+	.task h3 {
+		font-size: 21px !important;
+	}
+	.task p {
+		font-size: 14px;
+	}
+	header.closed button {
+		right: 32.5%;
+	}
+}
+.task:hover {
+	transform: translate(2px, -2px);
+}
+
+.task.reminder {
+	border-left: 5px solid #55c6f0;
+}
+
+.task h3 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 25px;
+	line-height: 1.8em;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding-bottom: 3px;
+	margin-bottom: 5px;
+}
+
+/* Task.vue end ************************************************** */
+
+/* Footer.vue begin ************************************************** */
+footer {
+	width: 100%;
+	height: 150px;
+	text-align: center;
+	background-color: #fff;
+	padding: 30px;
+}
+
+footer p {
+	font-weight: 200;
+	font-size: 15px;
+}
+/* Footer.vue end ************************************************** */
+
+/* AddTask.vue begin ************************************************** */
+.add-form {
+	max-width: 500px;
+	background: #f4f4f4;
+	padding: 1px 20px;
+	border-radius: 17px;
+	position: sticky;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.form-control {
+	margin: 20px 0;
+}
+
+.form-control label {
+	display: block;
+}
+
+.form-control input {
+	width: 100%;
+	height: 40px;
+	margin: 5px;
+	padding: 3px 7px;
+	font-size: 17px;
+}
+
+.form-control > .check {
+	height: 20px;
+	width: 5%;
+}
+
+.form-control-check {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.form-control select {
+	width: 100%;
+	height: 40px;
+	margin: 5px;
+	padding: 3px 7px;
+	font-size: 17px;
+}
+
+.form-control checkbox {
+	width: 100%;
+	display: block;
+}
+.form-control-check label {
+	flex: 1;
+}
+
+.form-control-check input {
+	flex: 2;
+	height: 20px;
+}
+/* AddTask.vue end ************************************************** */
+
+/* List.vue begin ************************************************** */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 10px 40px;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+/* List.vue end ************************************************** */

@@ -72,7 +72,7 @@ header.closed button {
 
 .btn {
 	display: inline-block;
-	background: #000;
+	background: rgb(98, 218, 255);
 	color: #fff;
 	border: none;
 	padding: 10px 20px;

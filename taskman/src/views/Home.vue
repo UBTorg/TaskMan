@@ -7,13 +7,10 @@
         :showAddTask="showAddTask"
         :class="[showAddTask ? 'closed' : '']"
       />
-      <!-- <Logout @log-out="logOut" /> -->
       <button class="btn" @click="logout">Log out</button>
-      <a>
-        <router-link v-if="userInfo.isAdmin" to="/admin">
-          Admin dashboard
-        </router-link>
-      </a>
+      <button v-if="userInfo && userInfo.isAdmin" class="btn">
+        <router-link to="/admin"> Admin dashboard </router-link>
+      </button>
       <div class="welcome" v-show="!hasTask">
         <h1>Welcome to the Task Manager</h1>
         <h3>Click the Add Task button to add a new task</h3>
@@ -79,11 +76,11 @@ export default {
       });
 
       const data = await res.json();
-
-      return data;
+      this.userInfo = null;
+      this.userInfo = data[0];
     },
     async addTask(task) {
-      const accessToken = await this.$auth.getTokenSilently();
+      const accessToken = await this.getAccessToken();
       const res = await fetch("api/v1/tasks", {
         method: "POST",
         headers: {
@@ -108,11 +105,11 @@ export default {
           },
         });
 
-        res.status === 200
-          ? (this.tasks = this.tasks.filter((task) => task.id !== id))
-          : alert("Error deleting task");
+        const toBeDeleted = this.tasks.findIndex((item) => item._id === id);
+        this.tasks.splice(toBeDeleted, 1);
       }
     },
+
     async fetchTasks() {
       const accessToken = await this.$auth.getTokenSilently();
       const res = await fetch("api/v1/tasks", {
@@ -139,11 +136,13 @@ export default {
         returnTo: window.location.origin,
       });
     },
+    async accessAdmin() {
+      this.userInfo = await this.fetchUserInfo();
+    },
   },
 
   async created() {
     this.tasks = (await this.fetchTasks()).tasks;
-    console.log("works");
     this.userInfo = await this.fetchUserInfo();
   },
 };

@@ -1,6 +1,7 @@
 <template>
   <div class="admin">
     <h2>Admin dashboard</h2>
+    <!-- <button class="btn" @click="logout">Log out</button> -->
     <Users @make-admin="makeAdmin" :users="users" />
   </div>
 </template>
@@ -43,6 +44,12 @@ export default {
         this.users = (await this.fetchUsers()).users;
       }
     },
+    // logout() {
+    //   console.log("logging out");
+    //   this.$auth.logout({
+    //     returnTo: window.location.origin,
+    //   });
+    // },
   },
   async created() {
     // this.users = [
